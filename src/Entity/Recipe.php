@@ -26,7 +26,7 @@ class Recipe
     use TimestampableEntity;
 
     #[ORM\Column]
-    private ?bool $draft = null;
+    private ?bool $draft = true;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $break = null;

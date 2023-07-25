@@ -2,16 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\RecipeHasIngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\HasIdTrait;
+use App\Repository\RecipeHasIngredientRepository;
 
 #[ORM\Entity(repositoryClass: RecipeHasIngredientRepository::class)]
 class RecipeHasIngredient
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    use HasIdTrait;
 
     #[ORM\Column]
     private ?float $quantity = null;
@@ -33,11 +31,6 @@ class RecipeHasIngredient
 
     #[ORM\ManyToOne(inversedBy: 'recipeHasIngredients')]
     private ?Unit $unit = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getQuantity(): ?float
     {

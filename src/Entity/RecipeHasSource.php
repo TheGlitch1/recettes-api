@@ -2,17 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\RecipeHasSourceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\HasIdTrait;
+use App\Repository\RecipeHasSourceRepository;
 
 #[ORM\Entity(repositoryClass: RecipeHasSourceRepository::class)]
 class RecipeHasSource
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    use HasIdTrait;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $url = null;
