@@ -2,18 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\SourceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\HasIdTrait;
+use App\Entity\Traits\HasNameTrait;
+use App\Repository\SourceRepository;
+use App\Entity\Traits\HasDescriptionTrait;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: SourceRepository::class)]
 class Source
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    use HasIdTrait;
+    use HasNameTrait;
+    use HasDescriptionTrait;
+    use TimestampableEntity;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $url = null;
