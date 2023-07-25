@@ -40,11 +40,19 @@ class Recipe
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $images;
 
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeHasSource::class, orphanRemoval: true)]
+    private Collection $recipeHasSources;
+
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeHasIngredient::class, orphanRemoval: true)]
+    private Collection $recipeHasIngredients;
+
 
     public function __construct()
     {
         $this->steps = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->recipeHasSources = new ArrayCollection();
+        $this->recipeHasIngredients = new ArrayCollection();
     }
 
     /* // because we ue the extenssion stof_doctrine and now we have a trait that manage the timestamps 
@@ -171,6 +179,66 @@ class Recipe
             // set the owning side to null (unless already changed)
             if ($image->getRecipe() === $this) {
                 $image->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipeHasSource>
+     */
+    public function getRecipeHasSources(): Collection
+    {
+        return $this->recipeHasSources;
+    }
+
+    public function addRecipeHasSource(RecipeHasSource $recipeHasSource): static
+    {
+        if (!$this->recipeHasSources->contains($recipeHasSource)) {
+            $this->recipeHasSources->add($recipeHasSource);
+            $recipeHasSource->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeHasSource(RecipeHasSource $recipeHasSource): static
+    {
+        if ($this->recipeHasSources->removeElement($recipeHasSource)) {
+            // set the owning side to null (unless already changed)
+            if ($recipeHasSource->getRecipe() === $this) {
+                $recipeHasSource->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RecipeHasIngredient>
+     */
+    public function getRecipeHasIngredients(): Collection
+    {
+        return $this->recipeHasIngredients;
+    }
+
+    public function addRecipeHasIngredient(RecipeHasIngredient $recipeHasIngredient): static
+    {
+        if (!$this->recipeHasIngredients->contains($recipeHasIngredient)) {
+            $this->recipeHasIngredients->add($recipeHasIngredient);
+            $recipeHasIngredient->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipeHasIngredient(RecipeHasIngredient $recipeHasIngredient): static
+    {
+        if ($this->recipeHasIngredients->removeElement($recipeHasIngredient)) {
+            // set the owning side to null (unless already changed)
+            if ($recipeHasIngredient->getRecipe() === $this) {
+                $recipeHasIngredient->setRecipe(null);
             }
         }
 

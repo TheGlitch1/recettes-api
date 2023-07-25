@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\HasDescriptionTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -15,6 +16,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 class Step
 {
     use HasIdTrait;
+    use HasDescriptionTrait;
     use HasPriorityTrait;
     use TimestampableEntity;
 
