@@ -2,25 +2,41 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\HasIdTrait;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\RecipeHasSourceRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RecipeHasSourceRepository::class)]
+#[ApiResource]
+#[Post]
+#[GetCollection]
+#[Get]
+#[Patch]
+#[Delete]
 class RecipeHasSource
 {
     use HasIdTrait;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['Recipe:item:get'])]
     private ?string $url = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipeHasSources')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Recipe:item:get'])]
     private ?Recipe $recipe = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipeHasSources')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['Recipe:item:get'])]
     private ?Source $source = null;
 
 

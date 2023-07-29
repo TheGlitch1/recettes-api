@@ -2,15 +2,27 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\HasIdTrait;
 use App\Entity\Traits\HasNameTrait;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Traits\HasPriorityTrait;
+use Doctrine\Common\Collections\Collection;
 use App\Repository\IngredientGroupRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: IngredientGroupRepository::class)]
+#[ApiResource]
+#[Post]
+#[GetCollection]
+#[Get]
+#[Patch]
+#[Delete]
 class IngredientGroup
 {
     use HasIdTrait;

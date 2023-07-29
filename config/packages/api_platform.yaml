@@ -1,7 +1,15 @@
 api_platform:
+    metadata_backward_compatibility_layer: false
+    defaults:
+        normalization_context:
+            skip_null_values: true
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
         versions: [3]
+    title: 'API Recette'
+    description: 'Recette API description : Les plus belle '
+    version: '0.0.1'
+    show_webby: false

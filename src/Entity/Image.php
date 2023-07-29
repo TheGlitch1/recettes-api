@@ -2,27 +2,41 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\HasIdTrait;
 use App\Repository\ImageRepository;
-use App\Entity\Traits\HasDescriptionTrait;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Traits\HasPriorityTrait;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-
+use App\Entity\Traits\HasTimestampTrait;
+use App\Entity\Traits\HasDescriptionTrait;
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
+#[ApiResource(mercure: true)]
+#[Post]
+#[GetCollection]
+#[Get]
+#[Delete]
+// #[Put]
+// #[Patch]
 class Image
 {
 
     use HasIdTrait;
     use HasDescriptionTrait;
     use HasPriorityTrait;
-    use TimestampableEntity;
+    use HasTimestampTrait;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['Recipe:item:get'])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['Recipe:item:get'])]
     private ?string $path = null;
 
     #[ORM\Column]

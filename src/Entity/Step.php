@@ -2,25 +2,38 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\HasDescriptionTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\HasIdTrait;
-use App\Entity\Traits\HasPriorityTrait;
 use App\Repository\StepRepository;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+use ApiPlatform\Metadata\ApiResource;
+use App\Entity\Traits\HasPriorityTrait;
+use ApiPlatform\Metadata\GetCollection; 
+use App\Entity\Traits\HasDescriptionTrait;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\Traits\HasTimestampTrait;use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: StepRepository::class)]
+#[ApiResource]
+#[Post]
+#[GetCollection]
+#[Get]
+#[Patch]
+#[Delete] 
 class Step
 {
     use HasIdTrait;
     use HasDescriptionTrait;
     use HasPriorityTrait;
-    use TimestampableEntity;
+    use HasTimestampTrait;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['Recipe:item:get'])]
     private ?string $content = null;
 
     /* //HasPriorityTrait
@@ -32,6 +45,7 @@ class Step
     private ?Recipe $recipe = null;
 
     #[ORM\OneToMany(mappedBy: 'step', targetEntity: Image::class, orphanRemoval: true)]
+    #[Groups(['Recipe:item:get'])]
     private Collection $images;
 
     public function __construct()

@@ -2,21 +2,39 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\HasIdTrait;
 use App\Repository\UnitRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UnitRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
+#[Post]
+#[GetCollection]
+#[Get]
+#[Patch]
+#[Delete]
 class Unit
 {
     use HasIdTrait;
 
     #[ORM\Column]
+    #[Groups(['Recipe:item:get'])]
     private ?bool $singular = null;
 
     #[ORM\Column]
+    #[Groups(['Recipe:item:get'])]
     private ?bool $plural = null;
 
     #[ORM\OneToMany(mappedBy: 'unit', targetEntity: RecipeHasIngredient::class)]

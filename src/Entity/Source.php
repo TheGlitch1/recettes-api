@@ -2,24 +2,37 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\HasIdTrait;
 use App\Entity\Traits\HasNameTrait;
 use App\Repository\SourceRepository;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use App\Entity\Traits\HasTimestampTrait;
 use App\Entity\Traits\HasDescriptionTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: SourceRepository::class)]
+#[ApiResource]
+#[Post]
+#[GetCollection]
+#[Get]
+#[Patch]
+#[Delete]
 class Source
 {
     use HasIdTrait;
     use HasNameTrait;
     use HasDescriptionTrait;
-    use TimestampableEntity;
+    use HasTimestampTrait;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['Recipe:item:get'])]
     private ?string $url = null;
 
     #[ORM\OneToMany(mappedBy: 'source', targetEntity: RecipeHasSource::class, orphanRemoval: true)]
