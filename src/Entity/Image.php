@@ -14,7 +14,10 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Traits\HasPriorityTrait;
 use App\Entity\Traits\HasTimestampTrait;
 use App\Entity\Traits\HasDescriptionTrait;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[ApiResource(mercure: true)]
 #[Post]
@@ -41,6 +44,10 @@ class Image
 
     #[ORM\Column]
     private ?int $size = null;
+
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'path', size: 'size')] //path and size are the new properties now for this 
+    private ?File $imageFile = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
     #[ORM\JoinColumn(nullable: false)]
@@ -95,6 +102,25 @@ class Image
     public function setStep(?Step $step): static
     {
         $this->step = $step;
+
+        return $this;
+    }
+
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+ 
+    public function setImageFile(File|UploadedFile|null $imageFile = null)
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
         return $this;
     }
