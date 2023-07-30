@@ -48,6 +48,9 @@ class Ingredient
     #[Groups(['Recipe:item:get'])]
     private ?bool $glutenFree = false;
 
+    /**
+     * @var Collection<int, RecipeHasIngredient>
+     */
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: RecipeHasIngredient::class, orphanRemoval: true)]
     private Collection $recipeHasIngredients;
 

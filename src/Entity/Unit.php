@@ -37,6 +37,9 @@ class Unit
     #[Groups(['Recipe:item:get'])]
     private ?bool $plural = null;
 
+    /**
+     * @var Collection<int, RecipeHasIngredient>
+     */
     #[ORM\OneToMany(mappedBy: 'unit', targetEntity: RecipeHasIngredient::class)]
     private Collection $recipeHasIngredients;
 

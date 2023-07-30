@@ -50,22 +50,37 @@ class Recipe
     #[Groups(['Recipe:item:get'])]
     private ?int $preparation = null;
 
+     /**
+     * @var Collection<int, Step>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Step::class, orphanRemoval: true)]
     #[Groups(['Recipe:item:get'])]
     private Collection $steps;
 
+     /**
+     * @var Collection<int, Image>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Image::class, orphanRemoval: true)]
     #[Groups(['Recipe:item:get'])]
     private Collection $images;
 
+    /**
+     * @var Collection<int, RecipeHasSource>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeHasSource::class, orphanRemoval: true)]
     #[Groups(['Recipe:item:get'])]
     private Collection $recipeHasSources;
 
+    /**
+     * @var Collection<int, RecipeHasIngredient>
+     */
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: RecipeHasIngredient::class, orphanRemoval: true)]
     #[Groups(['Recipe:item:get'])]
     private Collection $recipeHasIngredients;
 
+    /**
+     * @var Collection<int, Tag>
+     */
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'recipes')]
     #[Groups(['Recipe:item:get'])]
     private Collection $tags;

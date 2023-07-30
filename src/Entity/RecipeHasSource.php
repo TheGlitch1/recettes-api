@@ -78,6 +78,7 @@ class RecipeHasSource
 
     public function __toString(): string
     {
-        return $this->getRecipe() . ' - ' . $this->getSource();
+        $toString = ($this->getRecipe() ?? '') .' - '.($this->getSource() ?? '');
+        return $toString;
     }
 }

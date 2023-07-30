@@ -38,10 +38,16 @@ class Tag
     #[Groups(['Recipe:item:get'])]
     private ?self $parent = null;
 
+    /**
+     * @var Collection<int, Tag>
+     */
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     #[Groups(['Recipe:item:get'])]
     private Collection $children;
 
+    /**
+     * @var Collection<int, Recipe>
+     */
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'tags')]
     private Collection $recipes;
 

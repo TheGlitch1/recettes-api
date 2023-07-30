@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use Doctrine\DBAL\Types\Types;
@@ -14,10 +15,10 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Traits\HasPriorityTrait;
 use App\Entity\Traits\HasTimestampTrait;
 use App\Entity\Traits\HasDescriptionTrait;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[ApiResource(mercure: true)]
 #[Post]
@@ -99,7 +100,7 @@ class Image
         return $this->step;
     }
 
-    public function setStep(?Step $step): static
+    public function setStep(?Step $step): self
     {
         $this->step = $step;
 
@@ -107,19 +108,19 @@ class Image
     }
 
 
-    public function getImageFile()
+    public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
  
-    public function setImageFile(File|UploadedFile|null $imageFile = null)
+    public function setImageFile(File|UploadedFile|null $imageFile = null): Image
     {
         $this->imageFile = $imageFile;
 
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->setUpdatedAt(new DateTime());
         }
 
         return $this;

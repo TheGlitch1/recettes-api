@@ -15,7 +15,7 @@ trait HasPriorityTrait
     /**
      * Get the value of priority
      */
-    public function getPriority()
+    public function getPriority(): ?int
     {
         return $this->priority;
     }
@@ -25,7 +25,7 @@ trait HasPriorityTrait
      *
      * @return  self
      */
-    public function setPriority($priority)
+    public function setPriority(?int $priority): self
     {
         $this->priority = $priority;
 
