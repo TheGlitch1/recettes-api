@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 #[Delete]
 // #[Put]
 // #[Patch]
+#[Vich\Uploadable]
 class Image
 {
 

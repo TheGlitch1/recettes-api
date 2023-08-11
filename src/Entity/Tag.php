@@ -35,6 +35,7 @@ class Tag
     private ?bool $menu = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(name:"parent_id", referencedColumnName:"id", onDelete:"set null")]
     #[Groups(['Recipe:item:get'])]
     private ?self $parent = null;
 
@@ -137,5 +138,10 @@ class Tag
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName(). '(' . $this->getId() .')';
     }
 }

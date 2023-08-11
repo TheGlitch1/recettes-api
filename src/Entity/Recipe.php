@@ -85,6 +85,9 @@ class Recipe
     #[Groups(['Recipe:item:get'])]
     private Collection $tags;
 
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $cooking = null;
+
 
     public function __construct()
     {
@@ -305,6 +308,18 @@ class Recipe
     public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getCooking(): ?int
+    {
+        return $this->cooking;
+    }
+
+    public function setCooking(?int $cooking): static
+    {
+        $this->cooking = $cooking;
 
         return $this;
     }
