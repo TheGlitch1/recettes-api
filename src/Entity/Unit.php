@@ -29,13 +29,13 @@ class Unit
 {
     use HasIdTrait;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 64)]
     #[Groups(['Recipe:item:get'])]
-    private ?bool $singular = null;
+    private ?string $singular = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 64)]
     #[Groups(['Recipe:item:get'])]
-    private ?bool $plural = null;
+    private ?string $plural = null;
 
     /**
      * @var Collection<int, RecipeHasIngredient>
@@ -48,25 +48,25 @@ class Unit
         $this->recipeHasIngredients = new ArrayCollection();
     }
 
-
-    public function isSingular(): ?bool
+    public function getSingular(): ?string
     {
         return $this->singular;
     }
 
-    public function setSingular(bool $singular): static
+    public function setSingular(string $singular): self
     {
         $this->singular = $singular;
 
         return $this;
     }
 
-    public function isPlural(): ?bool
+    public function getPlural(): ?string
     {
         return $this->plural;
     }
 
-    public function setPlural(bool $plural): static
+
+    public function setPlural(string $plural): self
     {
         $this->plural = $plural;
 

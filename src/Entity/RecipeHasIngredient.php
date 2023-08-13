@@ -43,11 +43,12 @@ class RecipeHasIngredient
     private ?Recipe $recipe = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipeHasIngredients')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[Groups(['Recipe:item:get'])]
     private ?IngredientGroup $ingredientGroup = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipeHasIngredients')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[Groups(['Recipe:item:get'])]
     private ?Unit $unit = null;
 

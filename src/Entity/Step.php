@@ -28,7 +28,6 @@ use App\Entity\Traits\HasTimestampTrait;use Symfony\Component\Serializer\Annotat
 class Step
 {
     use HasIdTrait;
-    use HasDescriptionTrait;
     use HasPriorityTrait;
     use HasTimestampTrait;
 
