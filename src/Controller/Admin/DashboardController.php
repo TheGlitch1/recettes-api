@@ -3,11 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tag;
+use App\Entity\Step;
 use App\Entity\Unit;
+use App\Entity\Image;
 use App\Entity\Recipe;
 use App\Entity\Source;
 use App\Entity\Ingredient;
 use App\Entity\IngredientGroup;
+use App\Entity\RecipeHasSource;
+use App\Entity\RecipeHasIngredient;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -69,6 +73,10 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Sous-données');
 
+        yield MenuItem::linkToCrud('Etape', 'fa fa-forward-step', Step::class);
+        yield MenuItem::linkToCrud('Photo', 'fa fa-photo', Image::class);
         yield MenuItem::linkToCrud('Groupes d\'ingrédients', 'fa fa-cubes-stacked', IngredientGroup::class);
+        yield MenuItem::linkToCrud('Ingrédient de recette', 'fa fa-cubes-stacked', RecipeHasIngredient::class);
+        yield MenuItem::linkToCrud('Source de recette', 'fa fa-tags', RecipeHasSource::class);
     }
 }

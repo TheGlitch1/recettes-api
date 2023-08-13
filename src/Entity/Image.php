@@ -36,10 +36,6 @@ class Image
     use HasPriorityTrait;
     use HasTimestampTrait;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['Recipe:item:get'])]
-    private ?string $description = null;
-
     #[ORM\Column(length: 255)]
     #[Groups(['Recipe:item:get'])]
     private ?string $path = null;
@@ -52,11 +48,11 @@ class Image
     private ?File $imageFile = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
-    #[ORM\JoinColumn(nullable: false)]
+    // #[ORM\JoinColumn(nullable: false)] 
     private ?Recipe $recipe = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]
-    #[ORM\JoinColumn(nullable: false)]
+    // #[ORM\JoinColumn(nullable: false)]  //SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'step_id' cannot be null
     private ?Step $step = null;
 
 
@@ -125,5 +121,10 @@ class Image
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return (string) $this->getPath();
     }
 }

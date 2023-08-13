@@ -3,6 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Recipe;
+use App\Form\StepType;
+use App\Form\ImageType;
+use App\Form\RecipeHasSourceType;
+use App\Form\RecipeHasIngredientType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;

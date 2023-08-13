@@ -3,6 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\RecipeHasIngredient;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class RecipeHasIngredientCrudController extends AbstractCrudController
@@ -12,14 +16,18 @@ class RecipeHasIngredientCrudController extends AbstractCrudController
         return RecipeHasIngredient::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new(propertyName: 'id')->hideOnForm(),
+            BooleanField::new(propertyName: 'optional'),
+            AssociationField::new(propertyName: 'recipe'),
+            AssociationField::new(propertyName: 'ingredient'),
+            NumberField::new(propertyName: 'quantity'),
+            AssociationField::new(propertyName: 'unit'),
+            AssociationField::new(propertyName: 'ingredientGroup'),
         ];
     }
-    */
+   
 }

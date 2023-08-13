@@ -22,9 +22,8 @@ class ImageCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextareaField::new('title'),
             IntegerField::new('size'),
-            VichImageField::new('imageFile'),
+            VichImageField::new('imageFile','Image'),
             IntegerField::new('priority'),
             AssociationField::new('recipe'),
             AssociationField::new('step'),

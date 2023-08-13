@@ -7,6 +7,7 @@
         "php": ">=8.0.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
         "api-platform/core": "^2.7",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.10",
@@ -23,6 +24,7 @@
         "symfony/dotenv": "6.0.*",
         "symfony/expression-language": "6.0.*",
         "symfony/flex": "^2",
+        "symfony/form": "6.0.*",
         "symfony/framework-bundle": "6.0.*",
         "symfony/property-access": "6.0.*",
         "symfony/property-info": "6.0.*",
@@ -34,8 +36,7 @@
         "symfony/yaml": "6.0.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "vich/uploader-bundle": "^1.23",
-        "ext-intl": "*"
+        "vich/uploader-bundle": "^1.23"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

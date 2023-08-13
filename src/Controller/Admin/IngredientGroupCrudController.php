@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\IngredientGroup;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class IngredientGroupCrudController extends AbstractCrudController
@@ -12,14 +15,14 @@ class IngredientGroupCrudController extends AbstractCrudController
         return IngredientGroup::class;
     }
 
-    /*
+  
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+         return [
+            IdField::new(propertyName: 'id')->hideOnForm(),
+            TextField::new(propertyName: 'name'),
+            IntegerField::new(propertyName: 'priority'),
         ];
     }
-    */
+    
 }
