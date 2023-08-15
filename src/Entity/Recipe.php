@@ -88,6 +88,9 @@ class Recipe
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $cooking = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Recipe')]
+    private ?User $user = null;
+
 
     public function __construct()
     {
@@ -327,5 +330,17 @@ class Recipe
     public function __toString(): string
     {
         return $this->getName().' ('.$this->getId().')';
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

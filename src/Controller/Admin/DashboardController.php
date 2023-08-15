@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Tag;
 use App\Entity\Step;
 use App\Entity\Unit;
+use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\Recipe;
 use App\Entity\Source;
@@ -65,7 +66,7 @@ class DashboardController extends AbstractDashboardController
         
         yield MenuItem::section('Données');
 
-        // yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', User::class);
         yield MenuItem::linkToCrud('Sources', 'fa fa-share-from-square', Source::class);
         yield MenuItem::linkToCrud('Unités', 'fa fa-dice-one', Unit::class);
         yield MenuItem::linkToCrud('Ingrédients', 'fa fa-carrot', Ingredient::class);
